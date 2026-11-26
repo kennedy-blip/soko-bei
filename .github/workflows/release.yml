@@ -1,0 +1,40 @@
+name: Flutter build and Android release
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Generate Flutter platform scaffolding
+        run: flutter create --platforms=web,android --project-name soko_bei .
+      - name: Install dependencies
+        run: flutter pub get
+      - name: Analyze
+        run: flutter analyze
+      - name: Build web
+        run: flutter build web --release
+      - name: Build Android APK
+        run: flutter build apk --release
+      - name: Upload web artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: soko-bei-web
+          path: build/web/
+      - name: Publish APK release
+        if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: SokoBei latest
+          files: build/app/outputs/flutter-apk/app-release.apk
+          make_latest: true
