@@ -5,7 +5,6 @@ import '../models/market_models.dart';
 class LocalStore {
   static const _pricesKey = 'sokobei.prices.v1';
   static const _ledgerKey = 'sokobei.ledger.v1';
-  static const _settingsKey = 'sokobei.settings.v1';
   Future<List<PriceObservation>> loadPrices() async {
     final p = await SharedPreferences.getInstance();
     final raw = p.getString(_pricesKey);
