@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
       - name: Analyze
-        run: flutter analyze lib
+        run: dart analyze lib
       - name: Build web
         run: flutter build web --release
       - name: Build Android APK
