@@ -45,7 +45,7 @@ class _PricesScreenState extends State<PricesScreen> {
       else SliverList(delegate:SliverChildBuilderDelegate((ctx,i){final p=items[i];return Padding(padding:const EdgeInsets.fromLTRB(20,0,20,12),child:GlassCard(child:Row(children:[
         Container(width:44,height:44,decoration:BoxDecoration(color:const Color(0xFF35D39A).withValues(alpha:.13),borderRadius:BorderRadius.circular(14)),child:const Icon(Icons.eco_outlined,color:Color(0xFF35D39A))),
         const SizedBox(width:12),Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text(p.commodity,style:const TextStyle(fontWeight:FontWeight.w800,fontSize:16)),Text('${p.market} · ${DateFormat('d MMM').format(p.date)}',style:TextStyle(color:Theme.of(context).hintColor,fontSize:12)),Text('${money.format(p.unitCost)} / ${p.unit}',style:const TextStyle(color:Color(0xFF35D39A),fontWeight:FontWeight.w700))])),
-        Column(crossAxisAlignment:CrossAxisAlignment.end,children:[Text(money.format(p.price),style:const TextStyle(fontWeight:FontWeight.w800)),Text('${p.quantity:g} ${p.unit}',style:TextStyle(color:Theme.of(context).hintColor,fontSize:11))])
+        Column(crossAxisAlignment:CrossAxisAlignment.end,children:[Text(money.format(p.price),style:const TextStyle(fontWeight:FontWeight.w800)),Text('${p.quantity.toStringAsFixed(1)} ${p.unit}',style:TextStyle(color:Theme.of(context).hintColor,fontSize:11))])
       ])));},childCount:items.length))
     ]));
   }
