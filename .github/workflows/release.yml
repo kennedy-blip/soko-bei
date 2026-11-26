@@ -25,6 +25,8 @@ jobs:
         run: flutter build web --release
       - name: Build Android APK
         run: flutter build apk --release
+      - name: Prepare APK asset name
+        run: cp build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/soko-bei.apk
       - name: Upload web artifact
         uses: actions/upload-artifact@v4
         with:
@@ -36,5 +38,5 @@ jobs:
         with:
           tag_name: latest
           name: SokoBei latest
-          files: build/app/outputs/flutter-apk/app-release.apk
+          files: build/app/outputs/flutter-apk/soko-bei.apk
           make_latest: true
